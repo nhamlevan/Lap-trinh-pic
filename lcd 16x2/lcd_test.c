@@ -26,7 +26,7 @@
 #define LCD_RS                  PIN_C0 
 #define LCD_RW                  PIN_C1 
 #define LCD_E                   PIN_C2 
-#define LCD_DAT                 PORT_B 
+#define LCD_DAT                 PORT_B ///hgvbhujbujgbuj
 
 #include "lcd_4bit_lib.c" /,mmjbhgf
 //ugyujkghbjukgbuyfcvydcvtrydgcftfghtdcfvhv bhjm
