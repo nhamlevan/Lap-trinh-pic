@@ -5,16 +5,10 @@
 
 #FUSES NOWDT, HS, NOPUT, NOPROTECT, NODEBUG, NOBROWNOUT, NOLVP, NOCPD, NOWRT
 
-/*
-#define LCD_RS                  PIN_C0 
-#define LCD_RW                  PIN_C1 
-#define LCD_E                   PIN_C2 
-#define LCD_DAT                 PORT_B*/
-
-#bit LCD_D4=0x06.4
-#bit LCD_D5=0x06.5
-#bit LCD_D6=0x06.6
-#bit LCD_D7=0x06.7
+#define LCD_D4 PIN_B4
+#define LCD_D5 PIN_B5
+#define LCD_D6 PIN_B6
+#define LCD_D7 PIN_B7
 
 #byte LCD_DATA =0x06
 #bit LCD_RS=0x07.0
@@ -24,7 +18,7 @@
 #use fast_io(B)
 #use fast_io(C)
 
-#include "lcd_4bit_lib.c" 
+#include "lcd_4bit_lib.c" //gh
 
 /*=======================================*/ 
 void main(void) 
