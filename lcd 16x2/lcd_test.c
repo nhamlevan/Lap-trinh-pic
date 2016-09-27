@@ -5,8 +5,8 @@
 //  CCS C Compiler 
 // LCD 16x2 
 // 
-// by Nisar Ahmed 
-// 2009/03/27 
+// by Le Van Nham 
+// 9/2016
 ////////////////////////////////////////////////////////////////// 
 #include <16F877.h>                           // PIC16F877 header file 
 //#include <def_877a.h>
@@ -16,13 +16,7 @@
 #use i2c(master,fast,sda=PIN_C4,scl=PIN_C3)
 #FUSES NOWDT, HS, NOPUT, NOPROTECT, NODEBUG, NOBROWNOUT, NOLVP, NOCPD, NOWRT
 
-#define PORT_A                  0               // define for function output() 
-#define PORT_B                  1 
-#define PORT_C                  2 
-#define PORT_D                  3 
-#define PORT_E                  4 
 
-#define NCHAR_PER_LINE          16              // max char numbers per line 
 #define LCD_RS                  PIN_C0 
 #define LCD_RW                  PIN_C1 
 #define LCD_E                   PIN_C2 
