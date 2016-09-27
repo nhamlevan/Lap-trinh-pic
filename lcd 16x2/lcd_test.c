@@ -18,7 +18,7 @@
 #use fast_io(B)
 #use fast_io(C)
 
-#include "lcd_4bit_lib.c" //gh
+#include "lcd_8bit_lib.c" //gh
 
 /*=======================================*/ 
 void main(void) 

@@ -1,22 +1,29 @@
 
-#bit LCD_D4=0x06.4
+/*#bit LCD_D4=0x06.4
 #bit LCD_D5=0x06.5
 #bit LCD_D6=0x06.6
-#bit LCD_D7=0x06.7
+#bit LCD_D7=0x06.7*/
+#define LCD_D0 PIN_B0
+#define LCD_D1 PIN_B1
+#define LCD_D2 PIN_B2
+#define LCD_D3 PIN_B3
 
-#byte LCD_DATA =0x06
-#bit RS=0x07.0
-#bit RW=0x07.1
-#bit E=0x07.2
-
-#use fast_io(B)
-#use fast_io(C)
-
+void lcd_set_data(int8 dat){
+   output_bit(LCD_D0,dat&0x01);
+   output_bit(LCD_D1,dat&0x02);
+   output_bit(LCD_D2,dat&0x04);
+   output_bit(LCD_D3,dat&0x08);
+   output_bit(LCD_D4,dat&0x10);
+   output_bit(LCD_D5,dat&0x20);
+   output_bit(LCD_D6,dat&0x40);
+   output_bit(LCD_D7,dat&0x80);
+}
 void lcd_send_nib(int8 nib){
-    LCD_DATA=nib;
-    E=0b1;
+    //LCD_DATA=nib;
+    lcd_set_data(nib);
+    LCD_EN=0b1;
     delay_us(400); 
-    E=0b0;
+    LCD_EN=0b0;
 }
 
 
@@ -24,16 +31,16 @@ void lcd_send_nib(int8 nib){
 void lcd_cmd(int8 cmd){
     //lcd_send_2nib(cmd);
     delay_us(400); 
-    RS=0b0; 
-    RW=0b0;
+    LCD_RS=0b0; 
+    LCD_RW=0b0;
     lcd_send_nib(cmd);
     //RS=0b1;
 }
 void lcd_putChar(int8 dat){
-   delay_us(400); 
+    delay_us(400); 
  
-    RS=0b1;
-    RW=0b0;
+    LCD_RS=0b1;
+    LCD_RW=0b0;
     lcd_send_nib(dat);
     //Rs=0b0;
 
@@ -53,9 +60,15 @@ void lcd_init(void)
 { 
         set_tris_B(0x00);
         set_tris_C(0x00);
-       // output_low(LCD_E);              // Let LCD E line low 
-        E=0b0;
-
+       // output_low(LCD_E);              // Let LCD LCD_EN line low 
+        LCD_EN=0b0;
+      
+      lcd_cmd(0x03);            // LCD 16x2, 5x7, 8bits data 
+        delay_ms(15); 
+      
+      lcd_cmd(0x02);            // LCD 16x2, 5x7, 8bits data 
+        delay_ms(15); 
+      
         lcd_cmd(0x38);            // LCD 16x2, 5x7, 8bits data 
         delay_ms(15); 
         lcd_cmd(0x01);            // Clear LCD display 
@@ -70,7 +83,7 @@ void lcd_init(void)
 void lcd_print_str(char str[]) 
 { 
      //int8 i; 
-        for(int8 i=0; i<NCHAR_PER_LINE; i++) 
+        for(int8 i=0; i<16; i++) 
                 { 
                 if(str[i] == '\0') break; 
                 lcd_putChar(str[i]); 
