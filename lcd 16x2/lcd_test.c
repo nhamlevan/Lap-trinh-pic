@@ -1,29 +1,31 @@
-/*========================================= 
-8-BIT LCD DRIVER FOR PIC16F877A CCSC 
-==========================================*/ 
-/////////////////////////////////////////////////////////////////// 
-//  CCS C Compiler 
-// LCD 16x2 
-// 
-// by Le Van Nham 
-// 9/2016
-////////////////////////////////////////////////////////////////// 
+
 #include <16F877.h>                           // PIC16F877 header file 
-//#include <def_877a.h>
 #device *=16   
 #use delay(clock=4000000)                       // for 4Mhz crystal 
 
-#use i2c(master,fast,sda=PIN_C4,scl=PIN_C3)
 #FUSES NOWDT, HS, NOPUT, NOPROTECT, NODEBUG, NOBROWNOUT, NOLVP, NOCPD, NOWRT
 
-
+/*
 #define LCD_RS                  PIN_C0 
 #define LCD_RW                  PIN_C1 
 #define LCD_E                   PIN_C2 
-#define LCD_DAT                 PORT_B ///hgvbhujbujgbuj
+#define LCD_DAT                 PORT_B*/
 
-#include "lcd_4bit_lib.c" /,mmjbhgf
-//ugyujkghbjukgbuyfcvydcvtrydgcftfghtdcfvhv bhjm
+#bit LCD_D4=0x06.4
+#bit LCD_D5=0x06.5
+#bit LCD_D6=0x06.6
+#bit LCD_D7=0x06.7
+
+#byte LCD_DATA =0x06
+#bit LCD_RS=0x07.0
+#bit LCD_RW=0x07.1
+#bit LCD_EN=0x07.2
+
+#use fast_io(B)
+#use fast_io(C)
+
+#include "lcd_4bit_lib.c" 
+
 /*=======================================*/ 
 void main(void) 
 { 
